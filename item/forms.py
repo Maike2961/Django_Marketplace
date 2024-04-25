@@ -25,3 +25,21 @@ class novoItemForm(forms.ModelForm):
                 'class': INPUT_CLASSES
             })
         }
+class EditaItemForm(forms.ModelForm):
+    class Meta:
+        model = Item
+        fields = ('nome', 'descricao', 'preco', 'imagem', 'a_venda')
+        widgets = {
+            'nome': forms.TextInput(attrs={
+                'class': INPUT_CLASSES
+            }),
+            'descricao': forms.Textarea(attrs={
+                'class': INPUT_CLASSES
+            }),
+            'preco': forms.TextInput(attrs={
+                'class': INPUT_CLASSES
+            }),
+            'imagem': forms.FileInput(attrs={
+                'class': INPUT_CLASSES
+            })
+        }

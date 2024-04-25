@@ -17,7 +17,16 @@
             <p class="text-gray-700"><strong class="text-gray-500">Descrição: </strong>{{item.descricao}}</p>
         {%endif%}
 
-        <a href="#" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Contatar vendedor</a>
+        {%if request.user == item.criado_por%}
+        <div class="mt-6 p-6 bg-white rounded-xl">
+            <p>Esse é o seu item</p>
+
+            <a href="/item/edita/{{item.id}}" class="inline-block mt-6 px-6 py-3 text-lg text-white font-semibold bg-teal-500 rounded-xl">Editar</a>
+            <a href="/item/delete/{{item.id}}" class="inline-block mt-6 px-6 py-3 text-lg text-white font-semibold bg-red-500 rounded-xl">Deletar</a>
+        </div>
+        {%endif%}
+
+        <a href="/inbox/novo/{{item.id}}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Contatar vendedor</a>
     </div>
 </div>
 

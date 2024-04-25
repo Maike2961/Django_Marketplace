@@ -1,0 +1,55 @@
+{%extends 'base.html'%}
+
+{%block title %} Items {%endblock%}
+
+{%block content%}
+<div class="pb-6 grid grid-cols-4 gap-4 bg-gray-100 p-5 rounded-xl">
+    <div class="col-span-1">
+        <form method="get" action="{%url 'item:items' %}">
+            <input name="query" class="w-full py-4 px-6 border rounded-xl" type="text" value="{{query}}"
+                placeholder="Encontre bike, relogio, consoles....">
+            <button class="mt-5 py-4 px-8 text-lg bg-teal-500 text-white rounded-xl">Buscar</button>
+        </form>
+
+        <hr class="my-6">
+
+        <p class="font-semibold">Categorias</p>
+
+        <ul>
+            {%for categoria in categorias%}
+
+            <li class="py-2 px-2 rounded-xl{%if categoria.id == categoria_id %} bg-gray-200 {%endif%} ">
+                <a href="/item/?query={{query}}&categoria={{categoria.id}}">{{categoria.nome}}</a>
+            </li>
+
+            {%endfor%}
+        </ul>
+
+        <hr class="my-6">
+        <p class="font-semibold">Limpar Filtro</p>
+        <ul>
+            <li><a href="/item/" class="mt-5 py-4 px-8 inline-block bg-yellow-500 text-lg rounded-xl text-white">Limpar</a></li>
+        </ul>
+    </div>
+
+    <div class="col-span-3">
+        <div class="grid grid-cols-3 gap-3">
+            {%for item in items%}
+            <div>
+                <a href="/item/{{item.id}}">
+                    <div>
+                        <img src="{{item.imagem.url}}" alt="{{item.nome}}" class="rounded-t-xl" width="400"
+                            height="500">
+                    </div>
+
+                    <div class="p-6 bg-white rounded-b-xl">
+                        <h2 class="text-2xl">{{item.nome}}</h2>
+                        <p class="text-gray-500">Preço: {{item.preco}}</p>
+                    </div>
+                </a>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+</div>
+{%endblock content%}
